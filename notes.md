@@ -15,3 +15,6 @@ npx prisma migrate dev
 
 Administrador de DB de primsa
 npx prisma studio
+
+Mapear los productos y categorías con TS
+npm i ts-node
