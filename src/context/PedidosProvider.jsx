@@ -5,6 +5,7 @@ const PedidosContext = createContext();
 
 const PedidosProvider = ({ children }) => {
   const [categorias, setCategorias] = useState([])
+  const [categoriaActual, setCategoriaActual] = useState({})
   
   const obtenerCategorias = async () => {
     try {
@@ -19,11 +20,19 @@ const PedidosProvider = ({ children }) => {
     obtenerCategorias();
   }, []);
 
+  const handleClickCategoria = (id) => {
+    const categoria = categorias.filter(cat => cat.id === id);
+    console.log(categoria)
+    setCategoriaActual(categoria[0]);
+  }
+
   return (
     <PedidosContext.Provider
       value={
         {
-          categorias
+          categorias,
+          categoriaActual,
+          handleClickCategoria
         }
       }
     >
