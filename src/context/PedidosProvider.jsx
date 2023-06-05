@@ -20,6 +20,10 @@ const PedidosProvider = ({ children }) => {
     obtenerCategorias();
   }, []);
 
+  useEffect(() => {
+    setCategoriaActual(categorias[0]);
+  }, [categorias]);
+
   const handleClickCategoria = (id) => {
     const categoria = categorias.filter(cat => cat.id === id);
     console.log(categoria)
