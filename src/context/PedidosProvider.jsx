@@ -4,8 +4,10 @@ import axios from "axios";
 const PedidosContext = createContext();
 
 const PedidosProvider = ({ children }) => {
-  const [categorias, setCategorias] = useState([])
-  const [categoriaActual, setCategoriaActual] = useState({})
+  const [categorias, setCategorias] = useState([]);
+  const [categoriaActual, setCategoriaActual] = useState({});
+  const [producto, setProducto] = useState({});
+  const [modal, setModal] = useState(false);
   
   const obtenerCategorias = async () => {
     try {
@@ -30,13 +32,23 @@ const PedidosProvider = ({ children }) => {
     setCategoriaActual(categoria[0]);
   }
 
+  const handleSetProducto = (producto) => {
+    setProducto(producto);
+  }
+
+  const handleChangeModal = () => {
+    setModal(!modal);
+  }
+
   return (
     <PedidosContext.Provider
       value={
         {
           categorias,
           categoriaActual,
-          handleClickCategoria
+          handleClickCategoria,
+          handleSetProducto,
+          handleChangeModal
         }
       }
     >

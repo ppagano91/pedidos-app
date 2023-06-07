@@ -18,3 +18,6 @@ npx prisma studio
 
 Mapear los productos y categorías con TS
 npm i ts-node
+
+
+npm i react-modal
