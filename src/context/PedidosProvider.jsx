@@ -52,6 +52,7 @@ const PedidosProvider = ({ children }) => {
       setPedido([...pedido, producto]);
     }
 
+    setModal(false);
 
   }
 
@@ -66,7 +67,8 @@ const PedidosProvider = ({ children }) => {
           handleSetProducto,
           modal,
           handleChangeModal,
-          handleAgregarPedido
+          handleAgregarPedido,
+          pedido
         }
       }
     >
