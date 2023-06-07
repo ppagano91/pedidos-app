@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Image from 'next/image'
 import usePedidos from '@/hooks/usePedidos'
 
@@ -6,6 +6,7 @@ import { formatearDinero } from '@/helpers'
 
 const ModalProducto = () => {
   const {producto,handleChangeModal} = usePedidos();
+  const [cantidad, setCantidad] = useState(1)
 
   return (
     <div className='md:flex gap-10'>
@@ -22,6 +23,25 @@ const ModalProducto = () => {
         </div>
         <h2 className='text-3xl font-bold mt-5'>{producto.nombre}</h2>
         <p className='text-5xl mt-5 font-black text-amber-500'>{formatearDinero(producto.precio)}</p>
+        
+        <div className='flex gap-4 mt-5'>
+          <button type="button" onClick={()=>{
+              if(cantidad<=1){
+                return
+              }
+              setCantidad(cantidad-1)}}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+          <div className='text-3xl'>{cantidad}</div>
+          <button type="button" onClick={()=>{if (cantidad>=5){return};setCantidad(cantidad+1)}}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+        </div>
         </div>
     </div>
   )
