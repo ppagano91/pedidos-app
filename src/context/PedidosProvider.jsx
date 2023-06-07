@@ -8,6 +8,7 @@ const PedidosProvider = ({ children }) => {
   const [categoriaActual, setCategoriaActual] = useState({});
   const [producto, setProducto] = useState({});
   const [modal, setModal] = useState(false);
+  const [pedido, setPedido] = useState([])
   
   const obtenerCategorias = async () => {
     try {
@@ -40,6 +41,10 @@ const PedidosProvider = ({ children }) => {
     setModal(!modal);
   }
 
+  const handleAgregarPedido = ({categoriaId, Imagen, ...producto}) => {
+    setPedido([...pedido, producto]);
+  }
+
   return (
     <PedidosContext.Provider
       value={
@@ -50,7 +55,8 @@ const PedidosProvider = ({ children }) => {
           producto,
           handleSetProducto,
           modal,
-          handleChangeModal
+          handleChangeModal,
+          handleAgregarPedido
         }
       }
     >
