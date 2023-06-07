@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import axios from "axios";
+import {toast} from "react-toastify"
 
 const PedidosContext = createContext();
 
@@ -47,9 +48,11 @@ const PedidosProvider = ({ children }) => {
       // Actualizar cantidad
       const pedidoActualizado = pedido.map(productoSatate => productoSatate.id === producto.id ? producto : productoSatate);
       setPedido(pedidoActualizado);
+      toast.success("Producto actualizado")
     }else{
       // Agregar nuevo producto al pedido
       setPedido([...pedido, producto]);
+      toast.success("Producto agregado al pedido")
     }
 
     setModal(false);

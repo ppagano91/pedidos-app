@@ -21,3 +21,5 @@ npm i ts-node
 
 
 npm i react-modal
+
+npm install react-toastify

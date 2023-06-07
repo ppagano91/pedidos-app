@@ -1,11 +1,14 @@
 import Head from "next/head";
 
 import Modal from "react-modal";
+import {ToastContainer} from "react-toastify"
 
 import Sidebar from "@/components/Sidebar";
 import ModalProducto from "@/components/ModalProducto";
 
 import usePedidos from "@/hooks/usePedidos";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const customStyles = {
   content: {
@@ -41,6 +44,7 @@ export default function Home({ children, pagina }) {
         </main>
       </div>
       {modal && (<Modal isOpen={modal} style={customStyles}><ModalProducto/></Modal>)}
+      <ToastContainer/>
     </>
   );
 }
