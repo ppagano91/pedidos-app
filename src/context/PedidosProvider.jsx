@@ -47,7 +47,9 @@ const PedidosProvider = ({ children }) => {
           categorias,
           categoriaActual,
           handleClickCategoria,
+          producto,
           handleSetProducto,
+          modal,
           handleChangeModal
         }
       }

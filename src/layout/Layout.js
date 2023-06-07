@@ -1,7 +1,10 @@
-import Sidebar from "@/components/Sidebar";
 import Head from "next/head";
 
 import Modal from "react-modal";
+
+import Sidebar from "@/components/Sidebar";
+import ModalProducto from "@/components/ModalProducto";
+
 import usePedidos from "@/hooks/usePedidos";
 
 const customStyles = {
@@ -37,7 +40,7 @@ export default function Home({ children, pagina }) {
           </div>
         </main>
       </div>
-      {modal && (<Modal isOpen={modal} style={customStyles}></Modal>)}
+      {modal && (<Modal isOpen={modal} style={customStyles}><ModalProducto/></Modal>)}
     </>
   );
 }
