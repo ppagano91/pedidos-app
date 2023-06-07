@@ -41,8 +41,18 @@ const PedidosProvider = ({ children }) => {
     setModal(!modal);
   }
 
+  //{categoriaId, Imagen, ...producto} => quito los campos que no necesito para el pedido
   const handleAgregarPedido = ({categoriaId, Imagen, ...producto}) => {
-    setPedido([...pedido, producto]);
+    if(pedido.some(productoSatate => productoSatate.id === producto.id)){
+      // Actualizar cantidad
+      const pedidoActualizado = pedido.map(productoSatate => productoSatate.id === producto.id ? producto : productoSatate);
+      setPedido(pedidoActualizado);
+    }else{
+      // Agregar nuevo producto al pedido
+      setPedido([...pedido, producto]);
+    }
+
+
   }
 
   return (
