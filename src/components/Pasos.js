@@ -1,7 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import usePedidos from "@/hooks/usePedidos";
-usePedidos;
 
 const pasos = [
   { paso: 1, nombre: "Menú", url: "/" },
@@ -10,13 +8,12 @@ const pasos = [
 ];
 
 const Pasos = () => {
-  const { handleChangePaso, paso } = usePedidos();
   const router = useRouter();
 
   const calcularProgreso = () => {
-    if (paso === 1) return 5;
-    if (paso === 2) return 50;
-    if (paso === 3) return 100;
+    if (router.pathname === "/") return 5;
+    if (router.pathname === "/resumen") return 50;
+    if (router.pathname === "/total") return 100;
   };
   return (
     <>
@@ -25,7 +22,6 @@ const Pasos = () => {
           <button
             onClick={() => {
               router.push(paso.url);
-              handleChangePaso(paso.paso);
             }}
             className="text-2xl font-bold"
             key={paso.paso}

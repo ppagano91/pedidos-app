@@ -10,7 +10,6 @@ const PedidosProvider = ({ children }) => {
   const [producto, setProducto] = useState({});
   const [modal, setModal] = useState(false);
   const [pedido, setPedido] = useState([]);
-  const [paso, setPaso] = useState(1);
 
   const obtenerCategorias = async () => {
     try {
@@ -44,7 +43,7 @@ const PedidosProvider = ({ children }) => {
   };
 
   //{categoriaId, Imagen, ...producto} => quito los campos que no necesito para el pedido
-  const handleAgregarPedido = ({ categoriaId, Imagen, ...producto }) => {
+  const handleAgregarPedido = ({ categoriaId, ...producto }) => {
     if (pedido.some((productoSatate) => productoSatate.id === producto.id)) {
       // Actualizar cantidad
       const pedidoActualizado = pedido.map((productoSatate) =>
@@ -77,8 +76,6 @@ const PedidosProvider = ({ children }) => {
         handleChangeModal,
         handleAgregarPedido,
         pedido,
-        paso,
-        handleChangePaso,
       }}
     >
       {children}
