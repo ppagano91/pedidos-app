@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import axios from "axios";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
 const PedidosContext = createContext();
 
@@ -9,11 +9,12 @@ const PedidosProvider = ({ children }) => {
   const [categoriaActual, setCategoriaActual] = useState({});
   const [producto, setProducto] = useState({});
   const [modal, setModal] = useState(false);
-  const [pedido, setPedido] = useState([])
-  
+  const [pedido, setPedido] = useState([]);
+  const [paso, setPaso] = useState(1);
+
   const obtenerCategorias = async () => {
     try {
-      const {data} = await axios.get("/api/categorias");      
+      const { data } = await axios.get("/api/categorias");
       setCategorias(data);
     } catch (error) {
       console.log(error);
@@ -29,51 +30,56 @@ const PedidosProvider = ({ children }) => {
   }, [categorias]);
 
   const handleClickCategoria = (id) => {
-    const categoria = categorias.filter(cat => cat.id === id);
-    console.log(categoria)
+    const categoria = categorias.filter((cat) => cat.id === id);
+    console.log(categoria);
     setCategoriaActual(categoria[0]);
-  }
+  };
 
   const handleSetProducto = (producto) => {
     setProducto(producto);
-  }
+  };
 
   const handleChangeModal = () => {
     setModal(!modal);
-  }
+  };
 
   //{categoriaId, Imagen, ...producto} => quito los campos que no necesito para el pedido
-  const handleAgregarPedido = ({categoriaId, Imagen, ...producto}) => {
-    if(pedido.some(productoSatate => productoSatate.id === producto.id)){
+  const handleAgregarPedido = ({ categoriaId, Imagen, ...producto }) => {
+    if (pedido.some((productoSatate) => productoSatate.id === producto.id)) {
       // Actualizar cantidad
-      const pedidoActualizado = pedido.map(productoSatate => productoSatate.id === producto.id ? producto : productoSatate);
+      const pedidoActualizado = pedido.map((productoSatate) =>
+        productoSatate.id === producto.id ? producto : productoSatate
+      );
       setPedido(pedidoActualizado);
-      toast.success("Producto actualizado")
-    }else{
+      toast.success("Producto actualizado");
+    } else {
       // Agregar nuevo producto al pedido
       setPedido([...pedido, producto]);
-      toast.success("Producto agregado al pedido")
+      toast.success("Producto agregado al pedido");
     }
 
     setModal(false);
+  };
 
-  }
+  const handleChangePaso = (paso) => {
+    setPaso(paso);
+  };
 
   return (
     <PedidosContext.Provider
-      value={
-        {
-          categorias,
-          categoriaActual,
-          handleClickCategoria,
-          producto,
-          handleSetProducto,
-          modal,
-          handleChangeModal,
-          handleAgregarPedido,
-          pedido
-        }
-      }
+      value={{
+        categorias,
+        categoriaActual,
+        handleClickCategoria,
+        producto,
+        handleSetProducto,
+        modal,
+        handleChangeModal,
+        handleAgregarPedido,
+        pedido,
+        paso,
+        handleChangePaso,
+      }}
     >
       {children}
     </PedidosContext.Provider>
