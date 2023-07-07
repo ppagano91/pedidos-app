@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import Layout from "@/layout/Layout";
+import usePedidos from "@/hooks/usePedidos";
 
 export default function Total() {
+  const { pedido } = usePedidos();
+
+  const comprobarPedido = useCallback(() => {
+    return pedido.length === 0;
+  }, [pedido]);
+
+  const colocarOrden = (e) => {
+    e.preventDefault();
+    console.log("Enviando orden");
+  };
+
+  useEffect(() => {
+    comprobarPedido();
+  }, [pedido, comprobarPedido]);
+
   return (
     <Layout pagina="Total y Confirmar Pedido">
       <h1 className="text-4xl font-black">Total y Confirmar Pedido</h1>
       <p className="text-2xl my-10">Confirma tu pedido</p>
-      <form>
+      <form onSubmit={colocarOrden}>
         <div>
           <label
             htmlFor="nombre"
@@ -29,24 +45,16 @@ export default function Total() {
         </div>
         <div className="mt-5">
           <input
-            className="bg-indigo-600 w-full lg:w-auto px-5 py-2 rounded uppercase font-bold text-white text-center"
+            type="submit"
+            className={`${
+              comprobarPedido()
+                ? "bg-indigo-100"
+                : "bg-indigo-600 hover:bg-indigo-800 cursor-pointer "
+            } w-full lg:w-auto px-5 py-2 rounded uppercase font-bold text-white text-center`}
             value={"Confirmar Pedido"}
+            disabled={comprobarPedido()}
           />
         </div>
-        {/* <div>
-          <label
-            htmlFor="email"
-            className="block uppercase text-slate-800 font-bold text-xl mt-5"
-          >
-            Email
-          </label>
-
-          <input
-            type="email"
-            id="email"
-            className="w-full bg-gray-200 rounded-md lg:w-1/3 p-2 mt-2"
-          />
-        </div> */}
       </form>
     </Layout>
   );
