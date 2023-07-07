@@ -3,11 +3,11 @@ import Layout from "@/layout/Layout";
 import usePedidos from "@/hooks/usePedidos";
 
 export default function Total() {
-  const { pedido } = usePedidos();
+  const { pedido, nombre, setNombre } = usePedidos();
 
   const comprobarPedido = useCallback(() => {
-    return pedido.length === 0;
-  }, [pedido]);
+    return pedido.length === 0 || nombre === "" || nombre.trim().length < 3;
+  }, [pedido, nombre]);
 
   const colocarOrden = (e) => {
     e.preventDefault();
@@ -35,6 +35,8 @@ export default function Total() {
             type="text"
             id="nombre"
             className="w-full bg-gray-200 rounded-md lg:w-1/3 p-2 mt-2"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
           />
         </div>
         <div className="mt-10">
