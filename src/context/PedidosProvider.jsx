@@ -60,8 +60,10 @@ const PedidosProvider = ({ children }) => {
     setModal(false);
   };
 
-  const handleChangePaso = (paso) => {
-    setPaso(paso);
+  const handleEditarCantidades = (id) => {
+    const productoActualizar = pedido.filter((producto) => producto.id === id);
+    setProducto(productoActualizar[0]);
+    setModal(!modal);
   };
 
   return (
@@ -76,6 +78,7 @@ const PedidosProvider = ({ children }) => {
         handleChangeModal,
         handleAgregarPedido,
         pedido,
+        handleEditarCantidades,
       }}
     >
       {children}
