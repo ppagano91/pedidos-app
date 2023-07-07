@@ -1,18 +1,14 @@
 import React, { useEffect, useCallback } from "react";
 import Layout from "@/layout/Layout";
 import usePedidos from "@/hooks/usePedidos";
+import { formatearDinero } from "@/helpers";
 
 export default function Total() {
-  const { pedido, nombre, setNombre } = usePedidos();
+  const { pedido, nombre, setNombre, EnviarOrden, total } = usePedidos();
 
   const comprobarPedido = useCallback(() => {
     return pedido.length === 0 || nombre === "" || nombre.trim().length < 3;
   }, [pedido, nombre]);
-
-  const colocarOrden = (e) => {
-    e.preventDefault();
-    console.log("Enviando orden");
-  };
 
   useEffect(() => {
     comprobarPedido();
@@ -22,7 +18,7 @@ export default function Total() {
     <Layout pagina="Total y Confirmar Pedido">
       <h1 className="text-4xl font-black">Total y Confirmar Pedido</h1>
       <p className="text-2xl my-10">Confirma tu pedido</p>
-      <form onSubmit={colocarOrden}>
+      <form onSubmit={EnviarOrden}>
         <div>
           <label
             htmlFor="nombre"
@@ -42,7 +38,7 @@ export default function Total() {
         <div className="mt-10">
           <p className="text-2xl">
             Total a pagar {""}
-            <span className="font-bold">$ 3000</span>
+            <span className="font-bold">{formatearDinero(total)}</span>
           </p>
         </div>
         <div className="mt-5">
