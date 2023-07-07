@@ -100,10 +100,13 @@ const PedidosProvider = ({ children }) => {
 
   const EnviarOrden = async (e) => {
     e.preventDefault();
-    console.log("Enviando orden");
-    console.log(pedido);
-    console.log(nombre);
-    console.log(total);
+    try {
+      const { data } = await axios.post("/api/ordenes", {pedido,nombre,total,fecha:Date.now().toString()})
+      console.log(data)
+    } catch (error) {
+      console.error(error)
+      
+    }
   };
 
   return (
