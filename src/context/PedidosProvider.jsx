@@ -66,6 +66,14 @@ const PedidosProvider = ({ children }) => {
     setModal(!modal);
   };
 
+  const handleEliminarProducto = (id) => {
+    if (confirm("¿Estás seguro de eliminar el producto?")) {
+      const pedidoActualizado = pedido.filter((producto) => producto.id !== id);
+      setPedido(pedidoActualizado);
+      toast.error("Producto eliminado del pedido");
+    }
+  };
+
   return (
     <PedidosContext.Provider
       value={{
@@ -79,6 +87,7 @@ const PedidosProvider = ({ children }) => {
         handleAgregarPedido,
         pedido,
         handleEditarCantidades,
+        handleEliminarProducto,
       }}
     >
       {children}
