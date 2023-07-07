@@ -42,7 +42,7 @@ const PedidosProvider = ({ children }) => {
     setModal(!modal);
   };
 
-  //{categoriaId, Imagen, ...producto} => quito los campos que no necesito para el pedido
+  //{categoriaId, Imagen, ...producto} => Este fragmento de código tomar una copia del objeto producto sin los campos que están  que no necesito para el pedido (ejemplo categoriaId, Imagen)
   const handleAgregarPedido = ({ categoriaId, ...producto }) => {
     if (pedido.some((productoSatate) => productoSatate.id === producto.id)) {
       // Actualizar cantidad
