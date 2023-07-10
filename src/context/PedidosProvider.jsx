@@ -101,11 +101,27 @@ const PedidosProvider = ({ children }) => {
   const EnviarOrden = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/ordenes", {pedido,nombre,total,fecha:Date.now().toString()})
-      console.log(data)
+      await axios.post("/api/ordenes", {
+        pedido,
+        nombre,
+        total,
+        fecha: Date.now().toString(),
+      });
+
+      // resetear app
+
+      setCategoriaActual({});
+      setPedido([]);
+      setNombre("");
+      setTotal(0);
+
+      toast.success("¡Pedido realizado correctamente!");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
     } catch (error) {
-      console.error(error)
-      
+      console.error(error);
     }
   };
 
