@@ -11,6 +11,7 @@ Migrar modelos a DB
 npx prisma migrate dev
 
 Eliminar todos los registros de DB (resetea la DB), NO borra las tablas
+Actualizar tablas
 npx prisma migrate dev
 
 Administrador de DB de primsa
@@ -18,7 +19,6 @@ npx prisma studio
 
 Mapear los productos y categorías con TS
 npm i ts-node
-
 
 npm i react-modal
 
