@@ -2,6 +2,21 @@ import { PrismaClient } from "@prisma/client";
 
 export default async function handler(req, res) {
   const prisma = new PrismaClient();
+
+  // Obtener Ordenes/Pedidos
+
+  if (req.method === "GET") {
+    const ordenes = await prisma.orden.findMany({
+      where: {
+        estado: false,
+      },
+    });
+    res.status(200).json(ordenes);
+  }
+
+  // TAREA OBTENER LAS ORDENES CON ESTADO TRUE Y VER CUANTO DINERO EN CAJA DEBE HABER
+
+  // Crear Ordenes/Pedidos
   if (req.method === "POST") {
     const orden = await prisma.orden.create({
       data: {
@@ -11,9 +26,7 @@ export default async function handler(req, res) {
         fecha: req.body.fecha,
       },
     });
-    res.json(orden);
-  } else {
-    res.json({ message: "You are not posting" });
+    res.status(200).json(orden);
   }
 
   // const ordenes = await prisma.orden.findMany({
