@@ -23,3 +23,6 @@ npm i ts-node
 npm i react-modal
 
 npm install react-toastify
+
+npm install swr
+Para usar el hook useSWR para obtener datos de API's (Stale While Rivalidate)
