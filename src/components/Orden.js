@@ -1,9 +1,24 @@
 import React from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 import Image from "next/image";
 import { formatearDinero } from "@/helpers";
 
 const Orden = ({ orden }) => {
   const { id, nombre, total, pedido } = orden;
+
+  const completarOrden = async (ordenId) => {
+    try {
+      const url = `/api/ordenes/${ordenId}`;
+      const data = await axios.post(url);
+
+      toast.success("Orden Lista");
+    } catch (error) {
+      console.log(error.response.data.message);
+      toast.error("Hubo un error");
+    }
+  };
+
   return (
     <div className="border p-10 space-y-2">
       <h3 className="text-2xl font-bold">
@@ -40,10 +55,6 @@ const Orden = ({ orden }) => {
               </h4>
               <p className="text-lg font-bold">Cantidad {platillo.cantidad}</p>
             </div>
-
-            {/* <p className="text-lg font-bold">{platillo.cantidad}</p>
-            <p className="text-lg font-bold">{platillo.nombre}</p>
-            <p className="text-lg font-bold">{platillo.precio}</p> */}
           </div>
         ))}
       </div>
@@ -51,11 +62,14 @@ const Orden = ({ orden }) => {
         <p className="mt-5 font-black text-4xl text-amber-500">
           Total a pagar: {formatearDinero(total)}
         </p>
+        <button
+          className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-10 uppercase font-bold rounded-lg"
+          type="button"
+          onClick={() => completarOrden(id)}
+        >
+          Completar Orden
+        </button>
       </div>
-      {/* <div className="flex justify-between">
-        <p className="text-lg font-bold">Total:</p>
-        <p className="text-lg font-bold">{total}</p>
-      </div> */}
     </div>
   );
 };
