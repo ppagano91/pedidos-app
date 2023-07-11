@@ -9,12 +9,27 @@ const Orden = ({ orden }) => {
 
   const completarOrden = async (ordenId) => {
     try {
-      const url = `/api/ordenes/${ordenId}`;
-      const data = await axios.post(url);
-
-      toast.success("Orden Lista");
+      if (confirm(`¿Estás seguro de completar la orden #${ordenId}?`)) {
+        const url = `/api/ordenes/${ordenId}`;
+        const data = await axios.post(url);
+        toast.success("Orden Lista");
+      }
     } catch (error) {
-      console.log(error.response.data.message);
+      // console.log(error.response.data.message);
+      toast.error("Hubo un error");
+    }
+  };
+
+  const eliminarOrden = async (ordenId) => {
+    try {
+      if (confirm(`¿Estás seguro de eliminar la orden #${ordenId}?`)) {
+        // FALTA IMPLEMENTAR ELIMINAR ORDEN. ¿SE ELIMINA O SE MARCA COMO ELIMINADA EN DB?
+        // const url = `/api/ordenes/${ordenId}`;
+        // const data = await axios.delete(url);
+        toast.error("Orden Eliminada");
+      }
+    } catch (error) {
+      // console.log(error.response.data.message);
       toast.error("Hubo un error");
     }
   };
@@ -62,13 +77,22 @@ const Orden = ({ orden }) => {
         <p className="mt-5 font-black text-4xl text-amber-500">
           Total a pagar: {formatearDinero(total)}
         </p>
-        <button
-          className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-10 uppercase font-bold rounded-lg"
-          type="button"
-          onClick={() => completarOrden(id)}
-        >
-          Completar Orden
-        </button>
+        <div className="flex flex-col gap-1">
+          <button
+            className="bg-indigo-600 hover:bg-indigo-800 text-white mt-5 md:mt-0 py-3 px-5 uppercase font-bold rounded-lg"
+            type="button"
+            onClick={() => completarOrden(id)}
+          >
+            Completar Orden
+          </button>
+          <button
+            className="bg-red-600 hover:bg-red-800 text-white mt-5 md:mt-0 py-3 px-5 uppercase font-bold rounded-lg"
+            type="button"
+            onClick={() => eliminarOrden(id)}
+          >
+            Eliminar Orden
+          </button>
+        </div>
       </div>
     </div>
   );
