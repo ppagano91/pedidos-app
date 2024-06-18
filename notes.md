@@ -1,3 +1,4 @@
+## Dependencias instaldas
 npm i -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
@@ -26,3 +27,6 @@ npm install react-toastify
 
 npm install swr
 Para usar el hook useSWR para obtener datos de API's (Stale While Rivalidate)
+
+## Administración
+`localhost:3000/admin`
