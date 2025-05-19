@@ -1,0 +1,42 @@
+Strapi
+-Es un CMS Headless
+-Da una respuesta como REST API
+-Perimte crear APIs dinámicas con respuesta JSON o GraphQL
+-Se puede extender su funcionalidad con Plugins
+
+Requerimientos
+NodeJs > v16+
+PostgreSQL +10
+SQLite+3
+MariaDB+10.2.7
+
+
+Remix Run
+-Es una alternativa a Next.js para crear sitios y aplicaciones en React que se ejecuten en el cliente y servidor
+-Es un compilador, un Administrador de peticiones HTTP, un framework para el servidor y un framework para el Cliente
+-Hecho por los creadores de React Router DOM
+
+
+ContextAPI
+Permite pasar states y funciones desde el componente principal hasta los hijos, sin necesidad de pasarlo por cada componente.
+También permite actualizar el state del componente hijo
+Desventajas: mucho re-renders
+
+
+NextJs
+Framework en React para creación de Sitios Web y Aplicaciones
+Corre en el cliente y en el servidor
+Soporta Server Sider Rendering (SSR)y Static Site Generation (SSG)
+
+
+REDUX
+* Solo existe un store con todo el state de la aplicación
+* El state se modifica por medio de funciones (actions)
+
+Términos en Redux
+	STORE contiene un state
+	DISPATCH ejecuta una acción que actualizará el state
+	ACTION objetos en js, tiene un tipo y payload (datos)
+	SUBSCRIBE similar a un "event listener" para el state
+	REDUCERS funciones, saben que hacer con las acciones y el payload
+	
